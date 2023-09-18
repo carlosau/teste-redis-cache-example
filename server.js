@@ -17,6 +17,12 @@ const getAllProducts = async() => {
     })
 }
 
+//when update/modify product, we need to clear cache to catch the new data
+app.get('/updateproduct', async (req, res) => {
+    await client.del('products')
+    res.send('updated')
+})
+
 app.get('/', async (req, res) => {
     
     const productsFromCache = await client.get('products')
@@ -24,7 +30,7 @@ app.get('/', async (req, res) => {
         console.log('from cache')
         return res.send(JSON.parse(productsFromCache))
     }
-
+    console.log('from db')
     const products = await getAllProducts()
     await client.set('products', JSON.stringify(products))
     res.send(products)
