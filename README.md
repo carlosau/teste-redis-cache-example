@@ -1,1 +1,2 @@
-# teste-redis-cache-example\nTesting increase performance with redis cache
+#teste-redis-cache-example
+Testing increase performance with redis cache
